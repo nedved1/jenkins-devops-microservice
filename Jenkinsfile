@@ -3,16 +3,14 @@
 // 		echo "Test"
 // 		echo "Test"
 // }
-env {
+pipeline {
+	agent any
+	// agent { docker {image 'node:23.7' } }
+	environment {
 		dockerHome = tool 'myDocker'
 		mavenHome = tool 'myMaven'
 		PATH = "$PATH:$dockerHome/bin:$mavenHome/bin"
 	}
-	
-pipeline {
-	agent any
-	// agent { docker {image 'node:23.7' } }
-	
 	stages {
 		stage('Build') {
 			steps {
