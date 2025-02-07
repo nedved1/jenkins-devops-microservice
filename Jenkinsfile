@@ -4,13 +4,17 @@
 // 		echo "Test"
 // }
 pipeline {
-	// agent any
-	agent { docker {image 'node:23.7' } }
+	agent any
+	// agent { docker {image 'node:23.7' } }
 	stages {
 		stage('Build') {
 			steps {
-				sh 'node --version'
+				// sh 'node --version'
 				echo 'Building..'
+				echo "$PATH"
+				echo "BUILD_NUMBER: ${BUILD_NUMBER}"
+				echo "$env.BUILD_TAG"
+				echo "$env.BUILD_URL"
 			}
 		}
 		stage('Test') {
