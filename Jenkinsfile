@@ -5,7 +5,7 @@
 // }
 pipeline {
 	// agent any
-	agent { docker {image 'node:latest' } }
+	agent { docker {image 'node:23.7' } }
 	stages {
 		stage('Build') {
 			steps {
