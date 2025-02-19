@@ -51,6 +51,7 @@ pipeline {
 				script{
 					docker.withRegistry('','dockerhub') {
 						dockerImage.push('latest')
+					}
 				}
 			}
 		}
