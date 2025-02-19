@@ -38,6 +38,22 @@ pipeline {
 				sh "mvn failsafe:integration-test failsafe:verify"
 			}
 		}
+		stage('Build Docker Image') {
+			steps {
+				script {
+					dockerImage = docker.build("nedwed1/currency-exchange-devops:$env.BUILD_TAG")
+				}
+				// sh "docker build -t in28min/currency-exchange-devops:$env.BUILD_TAG ."
+			}
+		}
+		stage('Push Docker Image') {
+			steps {
+				script{
+					docker.withRegistry('','dockerhub') {
+						dockerImage.push('latest')
+				}
+			}
+		}
 	}
 	post {
 		always {
